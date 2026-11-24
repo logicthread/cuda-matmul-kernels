@@ -42,13 +42,35 @@ docs/        notes and profiling write-ups
 ## Requirements
 
 - NVIDIA GPU with a recent driver
-- CUDA Toolkit (nvcc, cuBLAS, Nsight tools)
-- CMake ≥ 3.18 (build system to be added)
+- CUDA Toolkit ≥ 11.5 (nvcc, cuBLAS; Nsight tools for profiling)
+
+## Build and run
+
+```bash
+make                                   # builds build/bench (-arch=native)
+./build/bench                          # all kernels, sizes 512..4096
+./build/bench --kernel 01_naive --sizes 1024,2048 --reps 20
+```
+
+Override the target arch if `native` is unsupported: `make ARCH=sm_75` (T4).
+
+The benchmark checks each kernel against cuBLAS (max abs error) and reports
+ms, GFLOP/s and % of cuBLAS for square FP32 matrices.
+
+### Google Colab
+
+Open [`colab.ipynb`](colab.ipynb) in Colab, select a GPU runtime, and run all
+cells. It clones this repo, builds, runs the benchmark, and has an optional
+Nsight Compute cell.
 
 ## Status
 
-Project scaffolding only. No kernels or results yet; results will be added
-only from logged runs.
+| Kernel | Implemented | Verified on GPU |
+|--------|-------------|-----------------|
+| 1 Naive | yes | not yet |
+| 2–8 | no | no |
+
+No results yet; numbers will be added only from logged runs.
 
 ## License
 
