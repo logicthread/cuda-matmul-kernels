@@ -1,0 +1,12 @@
+build/
+*.o
+*.obj
+*.ptx
+*.cubin
+*.fatbin
+*.nsys-rep
+*.ncu-rep
+*.sqlite
+.DS_Store
+.vscode/
+.idea/
